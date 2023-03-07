@@ -3,6 +3,7 @@ import happyfox
 from tqdm import tqdm
 import datetime
 import logging
+import re
 
 today = datetime.datetime.now().date()
 
@@ -51,5 +52,9 @@ for x in tqdm(range(ticket_count)):
                 happyfox.update_mond(email, ticket_id)
             if client == 206:
                 happyfox.up_raz(email, ticket_id)
+        if product == 27 and client == 161:
+            res_emp = re.search(r"New user is a Resources employee\?\n\n([\w]*)", ticket_message)
+            costa = re.search(r"/New user is part of the Cost Rica team\?\n\n([\w]*)", ticket_message)
+            print(res_emp[1])
     else:
         continue
