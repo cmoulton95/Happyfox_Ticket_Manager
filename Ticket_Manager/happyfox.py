@@ -140,7 +140,11 @@ If approved, please confirm how their system role should be assigned:
 def info_up(client, product, ttype, tic_id):
     url = 'https://support.productioncloud.io/api/1.1/json/ticket/{}/update_custom_fields/'.format(tic_id)
     headers = {'Content-Type': 'application/json'}
-    payload = json.dumps({'staff': 9, 't-cf-34': client, 't-cf-10': product, 't-cf-25': 108, 't-cf-26': ttype})
+    if product == 183:
+        func = 255
+    if product == 27:
+        func = 275
+    payload = json.dumps({'staff': 9, 't-cf-34': client, 't-cf-10': product, 't-cf-25': 108, 't-cf-40': func, 't-cf-26': ttype})
     ticket = requests.post(url, auth=auth,data=payload, headers=headers)
     if ticket.ok:
         logging.info("Ticket #{}: Ticket Fields Updated".format(tic_id))
