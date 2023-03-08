@@ -22,7 +22,7 @@ def saatchi_exception(email):
 #Exctracts the agency name from the user email and checks it against the 'ATL_Agency_Key' file
 def agency_list(email):
     agency = re.search(r"@([\w-]*)\.", email)
-    with open ("Ticket_Manager/ATL_Agency_Key.csv") as agency_list:
+    with open ("Ticket_Manager/csv_files/ATL_Agency_Key.csv") as agency_list:
         reader = csv.reader(agency_list, delimiter=',')
         for row in reader:
             if agency[1].lower() == row[0]:
@@ -33,7 +33,7 @@ def agency_list(email):
 
 #checks if the user is in the pre-approved atl list. Returns the group they are assigned to if on the list
 def pre_approved(email):
-    with open ('Ticket_Manager/ATL_Pre-approved_User_List.csv') as user_list:
+    with open ('Ticket_Manager/csv_files/ATL_Pre-approved_User_List.csv') as user_list:
         reader = csv.reader(user_list, delimiter=',')
         for row in reader:
             if email.lower() == row[2].lower():
@@ -172,7 +172,7 @@ def add_user(name, email):
 
 #Given the subject line of the ticket, this checks the 'Ticket_Type' file for the the Site, Request Type, and Site Key
 def ticket_type(subject):
-    with open ('Ticket_Manager/Ticket_Type.csv') as type_list:
+    with open ('Ticket_Manager/csv_files/Ticket_Type.csv') as type_list:
         reader = csv.reader(type_list, delimiter=",")
         for row in reader:
             if subject == row[0]:
